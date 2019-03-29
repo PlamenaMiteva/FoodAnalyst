@@ -1,0 +1,39 @@
+@import '~igniteui-angular/lib/core/styles/themes/utilities';
+%content-display {
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/food_background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    text-align: center;
+    flex-flow: column nowrap;
+    justify-content: stretch;
+    align-items: center;
+    padding: 40px 24px 40px 24px;
+    overflow: auto
+}
+
+@include b(content) {
+    @extend %content-display;
+    
+    .product-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .icon-container {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    .emptyListTemplate {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%,-50%);
+     }
+     .reorderLevelInput {
+        color: black;
+        width: 100%;
+    }
+}

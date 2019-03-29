@@ -1,0 +1,112 @@
+<div class="content">
+  <div class="header_wrapper">
+    <div>
+      <h4>Nutrition Calculator</h4>
+      <p>Our extensive nutrient database boasts over 70,000 unique foods, including: raw ingredients, manufacturers’
+        foods, processing items and more.</p>
+    </div>
+    <div>
+      <h4>Getting started</h4>
+      <p>Search for a food item below to get a list of selections meeting your search criteria and add the closest
+        match to your recipe list.
+        From there, navigate to your list, enter a quantity for each product and view a nutrition breakdown of total
+        Calories, Fat, Protein, and other nutrients.</p>
+    </div>
+  </div>
+  <div class="input_wrapper">
+    <igx-input-group type="search" class="offset" (keydown.enter)="searchProduct()">
+      <igx-prefix>
+        <igx-icon *ngIf="searchText.length == 0">search</igx-icon>
+        <igx-icon *ngIf="searchText.length > 0" (click)="clearSearch()">clear</igx-icon>
+      </igx-prefix>
+      <input #search1 id="search1" igxInput [(ngModel)]="searchText" />
+    </igx-input-group>
+    <button class="search-button" igxButton="raised" (click)="searchProduct()">Search</button>
+  </div>
+  <div class="content_wrapper">
+    <igx-expansion-panel>
+      <igx-expansion-panel-header [iconPosition]="'right'">
+        <igx-expansion-panel-description>
+          <igx-card *ngIf="food && food.calories!=0; else emptySearchTemplate">
+            <igx-card-header class="card_header_wrapper">
+              <igx-avatar src="assets/images/energy.svg" roundShape="true" size="large"> </igx-avatar>
+              <h3 class="igx-card-header__title">ENERGY</h3>
+              <h3 class="igx-card-header__title">{{totalEnergy.quantity}} {{totalEnergy.unit}}</h3>
+            </igx-card-header>
+            <igx-card-content>
+              <div class="card_content_wrapper">
+                <div>
+                  <igx-avatar src="assets/images/carbs.svg" roundShape="true" size="large"> </igx-avatar>
+                  <p class="igx-card-content__text">CARBS</p>
+                  <p class="igx-card-content__text">{{totalCarbs.quantity}} {{totalCarbs.unit}}</p>
+                </div>
+                <div>
+                  <igx-avatar src="assets/images/protein.svg" roundShape="true" size="large"> </igx-avatar>
+                  <p class="igx-card-content__text">PROTEIN</p>
+                  <p class="igx-card-content__text">{{totalProtein.quantity}} {{totalProtein.unit}}</p>
+                </div>
+                <div>
+                  <igx-avatar src="assets/images/fat.svg" roundShape="true" size="large"> </igx-avatar>
+                  <p class="igx-card-content__text">FAT</p>
+                  <p class="igx-card-content__text">{{totalFat.quantity}} {{totalFat.unit}}</p>
+                </div>
+              </div>
+            </igx-card-content>
+          </igx-card>
+        </igx-expansion-panel-description>
+      </igx-expansion-panel-header>
+      <igx-expansion-panel-body>
+        <igx-list *ngIf="food && food.calories!=0">
+          <div class="nutients-container">
+            <igx-list-item *ngFor="let nutrient of food.nutrients">
+              <span class="nutrient-label">{{ nutrient.label }}</span>
+              <span class="nutrient-value">{{ nutrient.quantity }}{{ nutrient.unit }}</span>
+            </igx-list-item>
+          </div>>
+        </igx-list>
+      </igx-expansion-panel-body>
+    </igx-expansion-panel>
+  </div>
+
+  <!-- <igx-grid #grid1 id="grid1" [data]="searchData" [primaryKey]="'Id'" [autoGenerate]="false" [paging]="true" [perPage]="10"
+    [paginationTemplate]="pager" [emptyGridTemplate]="emptySearchTemplate" width="50%" height="500px">
+    <igx-column width="20%" [field]="'Category'" dataType="string" [sortable]="true"></igx-column>
+    <igx-column width="70%" [field]="'Name'" dataType="string" [sortable]="true"></igx-column>
+    <igx-column [field]="'Id'" header=" " width="10%">
+      <ng-template igxCell let-value>
+        <button igxButton="icon" (click)="addProduct(value)">
+            <igx-icon>add_circle</igx-icon>
+        </button>       
+      </ng-template>
+    </igx-column>
+  </igx-grid> -->
+  <ng-template #pager let-grid>
+    <div *ngIf="grid.paging && grid.totalPages > 0" class="igx-paginator">
+      <button [disabled]="grid.isFirstPage" (click)="grid.paginate(0)" igxButton="icon" igxRipple igxRippleCentered="true">
+        <igx-icon>first_page</igx-icon>
+      </button>
+      <button [disabled]="grid.isFirstPage" (click)="grid.previousPage()" igxButton="icon" igxRipple igxRippleCentered="true">
+        <igx-icon>chevron_left</igx-icon>
+      </button>
+      <span>{{ grid.page + 1 }} of {{ grid.totalPages }}</span>
+      <button [disabled]="grid.isLastPage" (click)="grid.nextPage()" igxRipple igxRippleCentered="true" igxButton="icon">
+        <igx-icon>chevron_right</igx-icon>
+      </button>
+      <button [disabled]="grid.isLastPage" (click)="grid.paginate(grid.totalPages - 1)" igxButton="icon" igxRipple
+        igxRippleCentered="true">
+        <igx-icon>last_page</igx-icon>
+      </button>
+    </div>
+  </ng-template>
+  <ng-template #emptySearchTemplate>
+    <igx-card>
+      <igx-card-content>
+        <div class="emptySearchTemplate">
+          <igx-avatar src="assets/images/plate.jpg" roundShape="true" size="large"> </igx-avatar>
+          <p>Search our database to find your recipe ingredients</p>
+        </div>
+      </igx-card-content>
+    </igx-card>
+  </ng-template>
+  <igx-toast #toast></igx-toast>
+</div>

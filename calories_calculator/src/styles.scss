@@ -1,0 +1,75 @@
+/* You can add global styles to this file, and also import other style files */
+// Standard CSS normalize, comment out if not required or using a different module
+@import "~minireset.css/minireset";
+	
+/* See: https://www.infragistics.com/products/ignite-ui-angular/angular/components/themes.html */
+@import "~igniteui-angular/lib/core/styles/themes/index";
+
+$primary: #731963 !default;
+$secondary: #ce5712 !default;
+
+$app-palette: igx-palette($primary, $secondary);
+
+@include igx-core();
+@include igx-theme($app-palette);
+
+$nutrition-grid-theme: igx-grid-theme(
+  $header-background:rgb(234, 237, 242),
+  $header-text-color: #ce5712,
+  $ghost-header-text-color: #ce5712,
+  $filtering-header-text-color: #ce5712,
+  $filtering-row-text-color: #ce5712);
+@include igx-grid($nutrition-grid-theme);
+
+$nutrition-button-theme: igx-button-theme(
+  $raised-background:#F29E2B,
+  $raised-text-color:rgb(234, 237, 242),
+  $icon-background: #F29E2B,
+  $icon-color:rgb(234, 237, 242));
+@include igx-button($nutrition-button-theme);
+
+$nutrition-input-group-theme: igx-input-group-theme($idle-text-color: #F29E2B);
+@include igx-input-group($nutrition-input-group-theme);
+
+$nutrition-navbar-theme: igx-navbar-theme(
+  $background:#F29E2B,
+  $text-color:rgb(234, 237, 242),
+  $idle-icon-color: rgb(234, 237, 242));
+@include igx-navbar($nutrition-navbar-theme);
+
+$nutrition-expansion-panel-theme: igx-expansion-panel-theme(
+  $header-background: rgb(234, 237, 242),
+  $body-background: rgb(234, 237, 242),
+  $header-focus-background: rgb(234, 237, 242),
+  $header-icon-color:#F29E2B);
+@include igx-expansion-panel($nutrition-expansion-panel-theme);
+
+$nutrition-card-theme: igx-card-theme($background: rgb(234, 237, 242));
+@include igx-card($nutrition-card-theme);
+
+$nutrition-toast-theme: igx-toast-theme($background: rgba(206, 87, 17, 0.502));
+@include igx-toast($nutrition-toast-theme);
+
+// $my-icon-theme: igx-icon-theme($color: #F29E2B);
+// @include igx-icon($my-icon-theme);
+
+html, body {
+  height: 100%;
+}
+.nutrition-navbar{
+  position: fixed;
+  top : 0;
+  width: 100%;
+}
+.content p {
+  margin: 15px;
+}
+.icon-container {
+  text-align: center;
+ }
+.material-icons {
+ vertical-align: middle;
+}
+a, .igx-grid-summary__label{
+  color: #ce5712;
+}

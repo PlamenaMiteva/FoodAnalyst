@@ -1,0 +1,46 @@
+<div class="content">
+    <igx-grid #listGrid id="list-items-grid" [data]="listItems" [primaryKey]="'Id'" [autoGenerate]="false"
+        [allowFiltering]="true" [paging]="true" [perPage]="10" [paginationTemplate]="pager" [emptyGridTemplate]="emptyListTemplate"
+        width="80%" height="800px">
+        <igx-column width="10%" [field]="'Quantity'" [dataType]="'number'" [editable]="true" [hasSummary]="true"
+            [summaries]="quantitySummary">
+            <ng-template igxCellEditor let-cell="cell">
+                <input name="quantity" class="reorderLevelInput" type="number" [(ngModel)]="cell.value" (ngModelChange)="calculateNutrition($event, cell.cellID.rowID)" />
+            </ng-template>
+        </igx-column>
+        <igx-column width="15%" [field]="'Category'" dataType="string" [sortable]="true"></igx-column>
+        <igx-column width="25%" [field]="'Product'" dataType="string" [sortable]="true">
+            <ng-template igxCell let-value>
+                <div class="product-container">
+                    <button igxButton="icon" (click)="details(value)">
+                        <igx-icon>details</igx-icon>
+                    </button>
+                        <span>{{ value }}</span>
+                </div>
+            </ng-template>
+        </igx-column>
+        <igx-column width="10%" [field]="'Calories'" dataType="number" [sortable]="true" [hasSummary]="true"
+            [summaries]="caloriesSummary"></igx-column>
+        <igx-column width="10%" [field]="'Fats'" dataType="number" [sortable]="true" [hasSummary]="true" [summaries]="nutritionSummary"></igx-column>
+        <igx-column width="10%" [field]="'Carbs'" dataType="number" [sortable]="true" [hasSummary]="true" [summaries]="nutritionSummary"></igx-column>
+        <igx-column width="10%" [field]="'Proteins'" dataType="number" [sortable]="true" [hasSummary]="true"
+            [summaries]="nutritionSummary"></igx-column>
+        <igx-column width="10%" [field]="'Id'" [filterable]="false">
+                <ng-template igxHeader>
+                    <div class="icon-container">
+                                <igx-icon>delete</igx-icon>
+                            </div>
+                    </ng-template>
+            <ng-template igxCell let-cell="cell" let-value>
+                <button igxButton="icon" (click)="removeProduct(cell.cellID.rowID)">
+                    <igx-icon>delete</igx-icon>
+                </button>
+            </ng-template>
+        </igx-column>
+    </igx-grid>
+    <ng-template #emptyListTemplate>
+        <div class="emptyListTemplate">
+            Your list is empty. <a routerLink="/home">Search</a> our database to add a product to your list
+        </div>
+    </ng-template>
+</div>

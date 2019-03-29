@@ -1,0 +1,12 @@
+<igx-navbar class="nutrition-navbar" title="NUTRITION CALCULATOR">
+  <igx-action-icon>
+    <igx-avatar src="assets/images/logo.jpg" roundShape="true" size="small" class="test-avatar"></igx-avatar>
+  </igx-action-icon>
+  <button igxButton="icon" igxRipple igxRippleCentered="true" (click)="router.navigate(['/home']);">
+    <igx-icon fontSet="material">search</igx-icon>
+  </button>
+  <button igxButton="icon" igxRipple igxRippleCentered="true" (click)="router.navigate(['/list']);">
+    <igx-icon fontSet="material">list_alt</igx-icon>
+  </button>
+</igx-navbar>
+<router-outlet></router-outlet>
