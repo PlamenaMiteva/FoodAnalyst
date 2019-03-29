@@ -8,16 +8,19 @@ import { Observable } from 'rxjs';
     providedIn: 'root',
 })
 export class FoodDataService {
+    static instance: FoodDataService;
     endpoint = 'https://api.edamam.com/api/nutrition-data';
     app_id = '7267d317';
     app_key = '31e2e8f118778b3afa64f9e849a9ce96';
-    // httpOptions = {
-    //     headers: new HttpHeaders({
-    //         'Content-Type': 'application/json'
-    //     })
-    // };
+    recepieIngredients: Food[] = [];
 
-    constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient) {
+        if (!FoodDataService.instance) {
+            FoodDataService.instance = this;
+        }
+        return FoodDataService.instance;
+    }
+
     public searchProduct(searchText: string): Observable<Food> {
         const options = searchText ?
             {params: new HttpParams().
@@ -26,6 +29,10 @@ export class FoodDataService {
                     set('ingr', searchText)
             } : {};
         return this.httpClient.get(this.endpoint, options).pipe(map(res => new Food().deserialize(res)));
+    }
+
+    removeProductFromList(productId: number) {
+        this.recepieIngredients = this.recepieIngredients.filter(item => item['Id'] !== productId);
     }
   }
 

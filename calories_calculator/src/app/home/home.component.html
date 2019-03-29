@@ -24,36 +24,50 @@
     <button class="search-button" igxButton="raised" (click)="searchProduct()">Search</button>
   </div>
   <div class="content_wrapper">
-    <igx-expansion-panel>
+    <!-- <igx-expansion-panel>
       <igx-expansion-panel-header [iconPosition]="'right'">
-        <igx-expansion-panel-description>
+        <igx-expansion-panel-description> -->
           <igx-card *ngIf="food && food.calories!=0; else emptySearchTemplate">
+              <igx-card-header>
+                  <igx-card-actions >
+                      <div class="igx-card-actions__igroup--end">
+                        <span>
+                        <button igxButton="icon" (click)="addProduct()">
+                          <igx-icon>add_circle</igx-icon>
+                      </button>  
+                      <button igxButton="icon" (click)="Details()">
+                        <igx-icon>info</igx-icon>
+                    </button>
+                  </span>
+                      </div>
+                  </igx-card-actions>
+                </igx-card-header>
             <igx-card-header class="card_header_wrapper">
               <igx-avatar src="assets/images/energy.svg" roundShape="true" size="large"> </igx-avatar>
               <h3 class="igx-card-header__title">ENERGY</h3>
-              <h3 class="igx-card-header__title">{{totalEnergy.quantity}} {{totalEnergy.unit}}</h3>
+              <h3 class="igx-card-header__title">{{food.calories}} kcal</h3>
             </igx-card-header>
             <igx-card-content>
               <div class="card_content_wrapper">
                 <div>
                   <igx-avatar src="assets/images/carbs.svg" roundShape="true" size="large"> </igx-avatar>
                   <p class="igx-card-content__text">CARBS</p>
-                  <p class="igx-card-content__text">{{totalCarbs.quantity}} {{totalCarbs.unit}}</p>
+                  <p class="igx-card-content__text">{{food.carbs}} kcal</p>
                 </div>
                 <div>
                   <igx-avatar src="assets/images/protein.svg" roundShape="true" size="large"> </igx-avatar>
                   <p class="igx-card-content__text">PROTEIN</p>
-                  <p class="igx-card-content__text">{{totalProtein.quantity}} {{totalProtein.unit}}</p>
+                  <p class="igx-card-content__text">{{food.protein}} kcal</p>
                 </div>
                 <div>
                   <igx-avatar src="assets/images/fat.svg" roundShape="true" size="large"> </igx-avatar>
                   <p class="igx-card-content__text">FAT</p>
-                  <p class="igx-card-content__text">{{totalFat.quantity}} {{totalFat.unit}}</p>
+                  <p class="igx-card-content__text">{{food.fat}} kcal</p>
                 </div>
               </div>
             </igx-card-content>
           </igx-card>
-        </igx-expansion-panel-description>
+        <!-- </igx-expansion-panel-description>
       </igx-expansion-panel-header>
       <igx-expansion-panel-body>
         <igx-list *ngIf="food && food.calories!=0">
@@ -65,39 +79,8 @@
           </div>>
         </igx-list>
       </igx-expansion-panel-body>
-    </igx-expansion-panel>
-  </div>
-
-  <!-- <igx-grid #grid1 id="grid1" [data]="searchData" [primaryKey]="'Id'" [autoGenerate]="false" [paging]="true" [perPage]="10"
-    [paginationTemplate]="pager" [emptyGridTemplate]="emptySearchTemplate" width="50%" height="500px">
-    <igx-column width="20%" [field]="'Category'" dataType="string" [sortable]="true"></igx-column>
-    <igx-column width="70%" [field]="'Name'" dataType="string" [sortable]="true"></igx-column>
-    <igx-column [field]="'Id'" header=" " width="10%">
-      <ng-template igxCell let-value>
-        <button igxButton="icon" (click)="addProduct(value)">
-            <igx-icon>add_circle</igx-icon>
-        </button>       
-      </ng-template>
-    </igx-column>
-  </igx-grid> -->
-  <ng-template #pager let-grid>
-    <div *ngIf="grid.paging && grid.totalPages > 0" class="igx-paginator">
-      <button [disabled]="grid.isFirstPage" (click)="grid.paginate(0)" igxButton="icon" igxRipple igxRippleCentered="true">
-        <igx-icon>first_page</igx-icon>
-      </button>
-      <button [disabled]="grid.isFirstPage" (click)="grid.previousPage()" igxButton="icon" igxRipple igxRippleCentered="true">
-        <igx-icon>chevron_left</igx-icon>
-      </button>
-      <span>{{ grid.page + 1 }} of {{ grid.totalPages }}</span>
-      <button [disabled]="grid.isLastPage" (click)="grid.nextPage()" igxRipple igxRippleCentered="true" igxButton="icon">
-        <igx-icon>chevron_right</igx-icon>
-      </button>
-      <button [disabled]="grid.isLastPage" (click)="grid.paginate(grid.totalPages - 1)" igxButton="icon" igxRipple
-        igxRippleCentered="true">
-        <igx-icon>last_page</igx-icon>
-      </button>
-    </div>
-  </ng-template>
+    </igx-expansion-panel> -->
+  </div> 
   <ng-template #emptySearchTemplate>
     <igx-card>
       <igx-card-content>

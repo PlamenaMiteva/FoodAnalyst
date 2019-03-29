@@ -50,8 +50,8 @@ $nutrition-card-theme: igx-card-theme($background: rgb(234, 237, 242));
 $nutrition-toast-theme: igx-toast-theme($background: rgba(206, 87, 17, 0.502));
 @include igx-toast($nutrition-toast-theme);
 
-// $my-icon-theme: igx-icon-theme($color: #F29E2B);
-// @include igx-icon($my-icon-theme);
+$my-icon-theme: igx-icon-theme($color: rgb(234, 237, 242));
+@include igx-icon($my-icon-theme);
 
 html, body {
   height: 100%;

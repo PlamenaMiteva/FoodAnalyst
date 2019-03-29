@@ -1,32 +1,32 @@
 import { Injector } from '@angular/core';
 import { IgxNumberSummaryOperand, IgxSummaryResult } from 'igniteui-angular';
-import { DataService } from '../data.service';
+import { FoodDataService } from '../shared/food-data-service';
 
 export class NutritionSummary extends IgxNumberSummaryOperand {
-  dataService: DataService;
+  dataService: FoodDataService;
 
   constructor() {
     super();
-    const injector = Injector.create([{ provide: DataService, useClass: DataService, deps: [] }]);
-    this.dataService = injector.get(DataService);
+    const injector = Injector.create([{ provide: FoodDataService, useClass: FoodDataService, deps: [] }]);
+    this.dataService = injector.get(FoodDataService);
   }
 
   public operate(data?: any[]): IgxSummaryResult[] {
-    const items = this.dataService.listItems;
+    const items = this.dataService.recepieIngredients;
     let totalQuantity = 0;
     items.forEach(function(item) {
-      totalQuantity += item.Quantity;
+      totalQuantity += item.totalWeight;
   });
     const result = [];
     result.push({
       key: 'total',
       label: 'Total',
-      summaryResult: IgxNumberSummaryOperand.sum(data).toFixed(2) + 'g'
+      summaryResult: IgxNumberSummaryOperand.sum(data).toFixed(2) + 'kcal'
     });
     result.push({
       key: 'nutrition',
       label: 'Per 100g',
-      summaryResult: (items.length ? (IgxNumberSummaryOperand.sum(data) / totalQuantity) * 100 : 0).toFixed(2) + 'g'
+      summaryResult: (items.length ? (IgxNumberSummaryOperand.sum(data) / totalQuantity) * 100 : 0).toFixed(2) + 'kcal'
     });
 
     return result;

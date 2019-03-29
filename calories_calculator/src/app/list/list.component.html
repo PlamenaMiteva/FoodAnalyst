@@ -1,15 +1,14 @@
 <div class="content">
     <igx-grid #listGrid id="list-items-grid" [data]="listItems" [primaryKey]="'Id'" [autoGenerate]="false"
         [allowFiltering]="true" [paging]="true" [perPage]="10" [paginationTemplate]="pager" [emptyGridTemplate]="emptyListTemplate"
-        width="80%" height="800px">
-        <igx-column width="10%" [field]="'Quantity'" [dataType]="'number'" [editable]="true" [hasSummary]="true"
+        width="70%" height="500px">
+        <igx-column width="10%" [field]="'totalWeight'" header="Weight" [dataType]="'number'" [editable]="true" [hasSummary]="true"
             [summaries]="quantitySummary">
             <ng-template igxCellEditor let-cell="cell">
-                <input name="quantity" class="reorderLevelInput" type="number" [(ngModel)]="cell.value" (ngModelChange)="calculateNutrition($event, cell.cellID.rowID)" />
+                <input name="quantity" type="number" [(ngModel)]="cell.value" (ngModelChange)="calculateNutrition($event, cell.cellID.rowID)" />
             </ng-template>
         </igx-column>
-        <igx-column width="15%" [field]="'Category'" dataType="string" [sortable]="true"></igx-column>
-        <igx-column width="25%" [field]="'Product'" dataType="string" [sortable]="true">
+        <igx-column width="30%" [field]="'name'" header="Product" dataType="string" [sortable]="true">
             <ng-template igxCell let-value>
                 <div class="product-container">
                     <button igxButton="icon" (click)="details(value)">
@@ -19,13 +18,13 @@
                 </div>
             </ng-template>
         </igx-column>
-        <igx-column width="10%" [field]="'Calories'" dataType="number" [sortable]="true" [hasSummary]="true"
-            [summaries]="caloriesSummary"></igx-column>
-        <igx-column width="10%" [field]="'Fats'" dataType="number" [sortable]="true" [hasSummary]="true" [summaries]="nutritionSummary"></igx-column>
-        <igx-column width="10%" [field]="'Carbs'" dataType="number" [sortable]="true" [hasSummary]="true" [summaries]="nutritionSummary"></igx-column>
-        <igx-column width="10%" [field]="'Proteins'" dataType="number" [sortable]="true" [hasSummary]="true"
+        <igx-column width="13%" [field]="'calories'" header="Calories" dataType="number" [sortable]="true" [hasSummary]="true"
             [summaries]="nutritionSummary"></igx-column>
-        <igx-column width="10%" [field]="'Id'" [filterable]="false">
+        <igx-column width="13%" [field]="'fat'" header="Fat" dataType="number" [sortable]="true" [hasSummary]="true" [summaries]="nutritionSummary"></igx-column>
+        <igx-column width="13%" [field]="'carbs'" header="Carbs" dataType="number" [sortable]="true" [hasSummary]="true" [summaries]="nutritionSummary"></igx-column>
+        <igx-column width="13%" [field]="'protein'" header="Protein" dataType="number" [sortable]="true" [hasSummary]="true"
+            [summaries]="nutritionSummary"></igx-column>
+        <igx-column width="8%" [field]="'Id'" [filterable]="false">
                 <ng-template igxHeader>
                     <div class="icon-container">
                                 <igx-icon>delete</igx-icon>
@@ -40,7 +39,25 @@
     </igx-grid>
     <ng-template #emptyListTemplate>
         <div class="emptyListTemplate">
-            Your list is empty. <a routerLink="/home">Search</a> our database to add a product to your list
+            Your recepie list is empty. <a routerLink="/home">Search</a> our database for your recepie ingredients
         </div>
     </ng-template>
+    <ng-template #pager let-grid>
+            <div *ngIf="grid.paging && grid.totalPages > 0" class="igx-paginator">
+              <button [disabled]="grid.isFirstPage" (click)="grid.paginate(0)" igxButton="icon" igxRipple igxRippleCentered="true">
+                <igx-icon>first_page</igx-icon>
+              </button>
+              <button [disabled]="grid.isFirstPage" (click)="grid.previousPage()" igxButton="icon" igxRipple igxRippleCentered="true">
+                <igx-icon>chevron_left</igx-icon>
+              </button>
+              <span>{{ grid.page + 1 }} of {{ grid.totalPages }}</span>
+              <button [disabled]="grid.isLastPage" (click)="grid.nextPage()" igxRipple igxRippleCentered="true" igxButton="icon">
+                <igx-icon>chevron_right</igx-icon>
+              </button>
+              <button [disabled]="grid.isLastPage" (click)="grid.paginate(grid.totalPages - 1)" igxButton="icon" igxRipple
+                igxRippleCentered="true">
+                <igx-icon>last_page</igx-icon>
+              </button>
+            </div>
+          </ng-template>
 </div>
