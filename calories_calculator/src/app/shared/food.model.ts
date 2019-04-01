@@ -8,13 +8,13 @@ export class Food implements Deserializable {
     dietLabels: string[];
     healthLabels: string[];
     cautions: string[];
-    nutrients: Nutrient[] = [];
     fat: number; carbs: number; protein: number;
-    // totalEnergy: Nutrient;
-    // totalFat: Nutrient;
-    // totalCarbs: Nutrient;
-    // totalProtein: Nutrient;
-    // totalNutrientsCal: Nutrient[] = [];
+    // nutrients: Nutrient[] = [];
+    fatNutirents: Nutrient[] = [];
+    carbNutirents: Nutrient[] = [];
+    vitaminNutirents: Nutrient[] = [];
+    mineralNutirents: Nutrient[] = [];
+
 
     deserialize(input: any) {
         const _this = this;
@@ -27,7 +27,36 @@ export class Food implements Deserializable {
         // this.totalCarbs = new Nutrient().deserialize(input.totalNutrientsKCal['CHOCDF_KCAL']);
         // this.totalProtein = new Nutrient().deserialize(input.totalNutrientsKCal['PROCNT_KCAL']);
         Object.keys(input.totalNutrients).forEach(key => {
-            _this.nutrients.push(new Nutrient().deserialize(input.totalNutrients[key]));
+            switch (input.totalNutrients[key].label) {
+                case 'Saturated':
+                case 'Trans':
+                case 'Monounsaturated':
+                case 'Polyunsaturated':
+                _this.fatNutirents.push(new Nutrient().deserialize(input.totalNutrients[key]));
+                  break;
+                case 'Fiber':
+                case 'Sugars':
+                _this.carbNutirents.push(new Nutrient().deserialize(input.totalNutrients[key]));
+                  break;
+                  case 'Sodium':
+                  case 'Calcium':
+                  case 'Magnesium':
+                  case 'Potassium':
+                  case 'Iron':
+                  case 'Zinc':
+                  case 'Phosphorus':
+                  _this.mineralNutirents.push(new Nutrient().deserialize(input.totalNutrients[key]));
+                  break;
+                  case 'Thiamin (B1)':
+                  case 'Riboflavin (B2)':
+                  case 'Niacin (B3)':
+                  case 'Vitamin B6':
+                  case 'Vitamin E':
+                  case 'Folate (food)':
+                  _this.vitaminNutirents.push(new Nutrient().deserialize(input.totalNutrients[key]));
+                  break;
+                default:
+              }
         });
         // Object.keys(input.totalNutrientsKCal).forEach(key => {
         //     _this.totalNutrientsCal.push(new Nutrient().deserialize(input.totalNutrientsKCal[key]));

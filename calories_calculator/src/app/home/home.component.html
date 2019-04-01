@@ -24,9 +24,9 @@
     <button class="search-button" igxButton="raised" (click)="searchProduct()">Search</button>
   </div>
   <div class="content_wrapper">
-    <!-- <igx-expansion-panel>
-      <igx-expansion-panel-header [iconPosition]="'right'">
-        <igx-expansion-panel-description> -->
+    <igx-expansion-panel>
+      <igx-expansion-panel-header [iconPosition]="'none'">
+        <igx-expansion-panel-description>
           <igx-card *ngIf="food && food.calories!=0; else emptySearchTemplate">
               <igx-card-header>
                   <igx-card-actions >
@@ -35,7 +35,7 @@
                         <button igxButton="icon" (click)="addProduct()">
                           <igx-icon>add_circle</igx-icon>
                       </button>  
-                      <button igxButton="icon" (click)="Details()">
+                      <button igxButton="icon" (click)="showDetails()">
                         <igx-icon>info</igx-icon>
                     </button>
                   </span>
@@ -67,19 +67,63 @@
               </div>
             </igx-card-content>
           </igx-card>
-        <!-- </igx-expansion-panel-description>
+        </igx-expansion-panel-description>
       </igx-expansion-panel-header>
       <igx-expansion-panel-body>
         <igx-list *ngIf="food && food.calories!=0">
           <div class="nutients-container">
-            <igx-list-item *ngFor="let nutrient of food.nutrients">
-              <span class="nutrient-label">{{ nutrient.label }}</span>
-              <span class="nutrient-value">{{ nutrient.quantity }}{{ nutrient.unit }}</span>
-            </igx-list-item>
-          </div>>
+            <div class="left-nutrients-container">
+            <div class="fat-nutrients-container">
+                <igx-list-item isHeader="true">
+                    <span class="nutrient-header">FAT</span>
+                  </igx-list-item>
+                <igx-list-item *ngFor="let nutrient of food.fatNutirents">
+                  <div class="item-container">
+                    <span class="nutrient-label">{{ nutrient.label }}</span>
+                    <span class="nutrient-value">{{ nutrient.quantity }}{{ nutrient.unit }}</span>
+                  </div>
+                  </igx-list-item>
+            </div>
+            <div class="vitamin-nutrients-container">
+                <igx-list-item isHeader="true">
+                    <span class="nutrient-header">VITAMINS</span>
+                  </igx-list-item>
+                <igx-list-item *ngFor="let nutrient of food.vitaminNutirents">
+                    <div class="item-container">
+                    <span class="nutrient-label">{{ nutrient.label }}</span>
+                    <span class="nutrient-value">{{ nutrient.quantity }}{{ nutrient.unit }}</span>
+                    </div>
+                  </igx-list-item>
+            </div>
+          </div>
+          <div class="right-nutrients-container">
+            <div class="carb-nutrients-container">
+                <igx-list-item isHeader="true">
+                    <span class="nutrient-header">CARBS</span>
+                  </igx-list-item>
+                <igx-list-item *ngFor="let nutrient of food.carbNutirents">
+                    <div class="item-container">
+                    <span class="nutrient-label">{{ nutrient.label }}</span>
+                    <span class="nutrient-value">{{ nutrient.quantity }}{{ nutrient.unit }}</span>
+                    </div>
+                  </igx-list-item>
+            </div>
+            <div class="mineral-nutrients-container">
+                <igx-list-item isHeader="true">
+                    <h3 class="nutrient-header">MINERALS</h3>
+                  </igx-list-item>
+                <igx-list-item *ngFor="let nutrient of food.mineralNutirents">
+                    <div class="item-container">
+                    <span class="nutrient-label">{{ nutrient.label }}</span>
+                    <span class="nutrient-value">{{ nutrient.quantity }}{{ nutrient.unit }}</span>
+                    </div>
+                  </igx-list-item>
+            </div>
+          </div>
+          </div>
         </igx-list>
       </igx-expansion-panel-body>
-    </igx-expansion-panel> -->
+    </igx-expansion-panel>
   </div> 
   <ng-template #emptySearchTemplate>
     <igx-card>

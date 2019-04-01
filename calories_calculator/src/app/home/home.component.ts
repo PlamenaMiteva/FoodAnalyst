@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FoodDataService } from '../shared/food-data-service';
-import { IgxToastComponent, IgxToastPosition } from 'igniteui-angular';
+import { IgxToastComponent, IgxToastPosition, IgxExpansionPanelComponent } from 'igniteui-angular';
 import { Food } from '../shared/food.model';
 
 @Component({
@@ -10,6 +10,8 @@ import { Food } from '../shared/food.model';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  @ViewChild('panel', { read: IgxExpansionPanelComponent })
+  public panel: IgxExpansionPanelComponent;
   @ViewChild('toast', { read: IgxToastComponent })
   public toast: IgxToastComponent;
   public food: Food;
@@ -35,5 +37,9 @@ export class HomeComponent {
     this.toast.message = this.searchText + ' successfully added to recipe list';
     this.toast.position = IgxToastPosition.Middle;
     this.toast.show();
+  }
+
+  public showDetails() {
+      this.panel.toggle();
   }
 }

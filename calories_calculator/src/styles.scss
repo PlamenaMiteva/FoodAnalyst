@@ -47,11 +47,14 @@ $nutrition-expansion-panel-theme: igx-expansion-panel-theme(
 $nutrition-card-theme: igx-card-theme($background: rgb(234, 237, 242));
 @include igx-card($nutrition-card-theme);
 
+$nutrition-list-theme: igx-list-theme($background: rgb(234, 237, 242), $header-text-color: #F29E2B);
+@include igx-list($nutrition-list-theme);
+
 $nutrition-toast-theme: igx-toast-theme($background: rgba(206, 87, 17, 0.502));
 @include igx-toast($nutrition-toast-theme);
 
-$my-icon-theme: igx-icon-theme($color: rgb(234, 237, 242));
-@include igx-icon($my-icon-theme);
+$nutrition-icon-theme: igx-icon-theme($color: rgb(234, 237, 242));
+@include igx-icon($nutrition-icon-theme);
 
 html, body {
   height: 100%;
@@ -63,12 +66,6 @@ html, body {
 }
 .content p {
   margin: 15px;
-}
-.icon-container {
-  text-align: center;
- }
-.material-icons {
- vertical-align: middle;
 }
 a, .igx-grid-summary__label{
   color: #ce5712;
