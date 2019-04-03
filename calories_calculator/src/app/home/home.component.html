@@ -15,7 +15,7 @@
   </div>
   <div class="input_wrapper">
     <igx-input-group type="search" class="offset" (keydown.enter)="searchProduct()">
-      <igx-prefix>
+      <igx-prefix class="input-icons">
         <igx-icon *ngIf="searchText.length == 0">search</igx-icon>
         <igx-icon *ngIf="searchText.length > 0" (click)="clearSearch()">clear</igx-icon>
       </igx-prefix>
@@ -24,8 +24,8 @@
     <button class="search-button" igxButton="raised" (click)="searchProduct()">Search</button>
   </div>
   <div class="content_wrapper">
-    <igx-expansion-panel>
-      <igx-expansion-panel-header [iconPosition]="'none'">
+    <igx-expansion-panel #panel>
+      <igx-expansion-panel-header [disabled]="true" [iconPosition]="'none'">
         <igx-expansion-panel-description>
           <igx-card *ngIf="food && food.calories!=0; else emptySearchTemplate">
               <igx-card-header>
@@ -80,7 +80,7 @@
                 <igx-list-item *ngFor="let nutrient of food.fatNutirents">
                   <div class="item-container">
                     <span class="nutrient-label">{{ nutrient.label }}</span>
-                    <span class="nutrient-value">{{ nutrient.quantity }}{{ nutrient.unit }}</span>
+                    <span class="nutrient-value">{{ nutrient.quantity | number:'1.2-2' }}{{ nutrient.unit }}</span>
                   </div>
                   </igx-list-item>
             </div>
@@ -91,7 +91,7 @@
                 <igx-list-item *ngFor="let nutrient of food.vitaminNutirents">
                     <div class="item-container">
                     <span class="nutrient-label">{{ nutrient.label }}</span>
-                    <span class="nutrient-value">{{ nutrient.quantity }}{{ nutrient.unit }}</span>
+                    <span class="nutrient-value">{{ nutrient.quantity | number:'1.2-2' }}{{ nutrient.unit }}</span>
                     </div>
                   </igx-list-item>
             </div>
@@ -104,18 +104,18 @@
                 <igx-list-item *ngFor="let nutrient of food.carbNutirents">
                     <div class="item-container">
                     <span class="nutrient-label">{{ nutrient.label }}</span>
-                    <span class="nutrient-value">{{ nutrient.quantity }}{{ nutrient.unit }}</span>
+                    <span class="nutrient-value">{{ nutrient.quantity | number:'1.2-2' }}{{ nutrient.unit }}</span>
                     </div>
                   </igx-list-item>
             </div>
             <div class="mineral-nutrients-container">
                 <igx-list-item isHeader="true">
-                    <h3 class="nutrient-header">MINERALS</h3>
+                    <span class="nutrient-header">MINERALS</span>
                   </igx-list-item>
                 <igx-list-item *ngFor="let nutrient of food.mineralNutirents">
                     <div class="item-container">
                     <span class="nutrient-label">{{ nutrient.label }}</span>
-                    <span class="nutrient-value">{{ nutrient.quantity }}{{ nutrient.unit }}</span>
+                    <span class="nutrient-value">{{ nutrient.quantity | number:'1.2-2' }}{{ nutrient.unit }}</span>
                     </div>
                   </igx-list-item>
             </div>

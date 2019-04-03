@@ -29,6 +29,7 @@ export class HomeComponent {
   }
 
   public clearSearch() {
+    this.searchText = '';
     this.food = new Food();
   }
 

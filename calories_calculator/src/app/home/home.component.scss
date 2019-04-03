@@ -39,6 +39,9 @@
         display: flex;
         flex-direction: row;
      }
+     .input-icons>igx-icon {
+        color: #F29E2B;
+     }
      .offset{
          width: 80%;
          height: 3rem;
@@ -67,6 +70,7 @@
      }
      .nutients-container{
          display: flex;
+         padding-left: 2rem;
      }
      .left-nutrients-container, .right-nutrients-container{
          flex: 1;
@@ -78,6 +82,14 @@
     .item-container>span {
         display: flex;
         flex: 1;
+    }
+    .nutrient-label, .nutrient-value{
+        font-weight: 400;
+        font-size: 0.875rem;
+        letter-spacing: 0.015625rem;
+        text-transform: none;
+        line-height: 1.25rem;
+        margin: 0;
     }
     .igx-paginator {
        display: flex;
